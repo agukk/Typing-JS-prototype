@@ -1,3 +1,4 @@
+const topicText = document.querySelector(".topic p")
 const typingText = document.querySelector(".typing-text p");
 let inpField = document.querySelector(".wrapper .input-field");
 let correctTag = document.querySelector(".correct-types span");
@@ -10,7 +11,12 @@ let charIndex = correctTypes = mistakes = 0;
 function randomParagraph() {
     // getting random number and it'll always less than the paragraphs length
     let randIndex = Math.floor(Math.random() * paragraphs.length);
+
+    // insert topic above the typing text
+    topicText.innerHTML = topics[randIndex];
+
     typingText.innerHTML = "";
+
     // getting random item from the paragraphs array, splitting all characters of it,
     // adding each character inside span and the adding this span inside p tag.
     paragraphs[randIndex].split("").forEach((char) => {
@@ -18,6 +24,7 @@ function randomParagraph() {
         typingText.innerHTML += spanTag;
     });
     typingText.querySelectorAll("span")[0].classList.add("active");
+    
     // focusing input field on keydown or click event
     document.addEventListener("keydown", () => inpField.focus());
     typingText.addEventListener("click", () => inpField.focus());
